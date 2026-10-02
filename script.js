@@ -12,6 +12,7 @@
 const profileFiles = [
   'template.html',
   // Agrega tu archivo aquí abajo:
+  'pancracio.html'
 ];
 
 // Elementos del DOM
