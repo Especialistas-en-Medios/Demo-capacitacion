@@ -62,6 +62,30 @@ try {
             $localPath = "index.html"
         }
 
+        # Endpoint especial: /api/profiles (Lista automáticamente los archivos HTML de profiles/)
+        if ($localPath -eq "api/profiles" -or $localPath -eq "api/profiles/") {
+            $profilesDir = [System.IO.Path]::Combine($rootPath, "profiles")
+            $files = @()
+            if ([System.IO.Directory]::Exists($profilesDir)) {
+                $files = @(Get-ChildItem -Path $profilesDir -Filter "*.html" | Select-Object -ExpandProperty Name)
+            }
+            if ($files.Count -eq 0) {
+                $jsonString = "[]"
+            } elseif ($files.Count -eq 1) {
+                $jsonString = "[ `"$($files[0])`" ]"
+            } else {
+                $jsonString = ConvertTo-Json -InputObject $files
+            }
+            $bytes = [System.Text.Encoding]::UTF8.GetBytes($jsonString)
+            $response.ContentType = "application/json; charset=utf-8"
+            $response.ContentLength64 = $bytes.Length
+            $response.StatusCode = 200
+            $response.OutputStream.Write($bytes, 0, $bytes.Length)
+            $response.Close()
+            Write-Host "[API 200] /api/profiles ($($files.Count) perfiles encontrados)" -ForegroundColor Cyan
+            continue
+        }
+
         # Decodificar URL y resolver ruta en el sistema
         $decodedPath = [System.Uri]::UnescapeDataString($localPath).Replace('/', [System.IO.Path]::DirectorySeparatorChar)
         $filePath = [System.IO.Path]::Combine($rootPath, $decodedPath)

@@ -2,17 +2,10 @@
  * =========================================================================
  * Script de carga dinámica de perfiles - Capacitación Git & GitHub
  * =========================================================================
+ * Detecta automáticamente todos los archivos HTML en la carpeta profiles/
+ * para que los desarrolladores NO tengan que editar este archivo y se eviten
+ * los conflictos de fusión (merge conflicts) en los Pull Requests.
  */
-
-/**
- * LISTA DE PERFILES REGISTRADOS
- * Cada desarrollador debe agregar aquí el nombre de su archivo HTML.
- * Ejemplo: 'juan-perez.html',
- */
-const profileFiles = [
-  'template.html',
-  // Agrega tu archivo aquí abajo:
-];
 
 // Elementos del DOM
 const profilesContainer = document.getElementById('profiles');
@@ -21,16 +14,63 @@ const countBadge = document.getElementById('profileCount');
 const corsWarning = document.getElementById('corsWarning');
 
 /**
+ * Obtiene la lista de archivos de la carpeta profiles/
+ * 1. Primero intenta consultar la API local del servidor (/api/profiles)
+ * 2. Si falla (ej. GitHub Pages), consulta la API pública de GitHub
+ * 3. Fallback a template.html si no hay conexión
+ */
+async function getProfileFiles() {
+  // 1. Intento: Servidor local (iniciar-demo.bat)
+  try {
+    const localRes = await fetch('api/profiles');
+    if (localRes.ok) {
+      let files = await localRes.json();
+      if (typeof files === 'string') {
+        files = [files];
+      }
+      if (Array.isArray(files) && files.length > 0) {
+        console.log('[Info] Perfiles detectados desde servidor local:', files);
+        return files;
+      }
+    }
+  } catch (e) {
+    // Continúa con el fallback
+  }
+
+  // 2. Intento: API de GitHub (funciona en GitHub Pages o cualquier hosting)
+  try {
+    const ghRes = await fetch('https://api.github.com/repos/Especialistas-en-Medios/Demo-capacitacion/contents/profiles');
+    if (ghRes.ok) {
+      const contents = await ghRes.json();
+      if (Array.isArray(contents)) {
+        const ghFiles = contents
+          .filter(item => item.type === 'file' && item.name.toLowerCase().endsWith('.html'))
+          .map(item => item.name);
+        if (ghFiles.length > 0) {
+          console.log('[Info] Perfiles detectados desde API de GitHub:', ghFiles);
+          return ghFiles;
+        }
+      }
+    }
+  } catch (e) {
+    // Continúa con el fallback
+  }
+
+  // 3. Fallback seguro
+  return ['template.html'];
+}
+
+/**
  * Carga e inyecta dinámicamente cada perfil en el contenedor #profiles
  */
 async function loadAllProfiles() {
-  // Advertencia visual si se detecta que se abrió con doble clic (file://)
   if (window.location.protocol === 'file:') {
     if (corsWarning) {
       corsWarning.classList.remove('d-none');
     }
   }
 
+  const profileFiles = await getProfileFiles();
   let loadedCount = 0;
 
   for (const fileName of profileFiles) {

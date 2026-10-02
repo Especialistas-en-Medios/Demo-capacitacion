@@ -55,24 +55,14 @@ git checkout -b feature/perfil-nombre-apellido
    - Tecnologías o especialidades técnicas.
    - Enlace a foto o avatar de perfil.
 
-> **Nota:** Puedes abrir tu archivo `profiles/nombre-apellido.html` directamente en el navegador con doble clic para previsualizar el diseño individual mientras lo editas.
+> **Nota:** La aplicación detecta automáticamente cualquier archivo `.html` dentro de `profiles/`, por lo que **no necesitas editar ningún archivo JavaScript**.
 
-### 4. Registrar tu perfil en la aplicación
-Abre el archivo [script.js](file:///c:/Users/deves/Documents/DESARROLLO_EM/Demo-capacitacion/script.js) y agrega el nombre de tu archivo en el arreglo `profileFiles`:
-
-```javascript
-const profileFiles = [
-  'template.html',
-  'nombre-apellido.html', // <-- Agrega tu archivo aquí
-];
-```
-
-### 5. Validar localmente
+### 4. Validar localmente
 Para comprobar que tu tarjeta se visualiza correctamente en la vista general:
 - Ejecuta `iniciar-demo.bat` con doble clic (inicia un servidor local y abre el navegador en `http://localhost:8080`).
 - O en Visual Studio: Clic derecho sobre `index.html` > **Ver en el explorador** (`Ctrl + Shift + W`).
 
-### 6. Confirmar cambios (Commit)
+### 5. Confirmar cambios (Commit)
 Verifica los archivos modificados:
 
 ```bash
@@ -91,14 +81,14 @@ Crea el commit respetando la convención:
 git commit -m "feat: agrega tarjeta de presentacion de Nombre Apellido"
 ```
 
-### 7. Publicar tu rama
+### 6. Publicar tu rama
 Envía tu rama al repositorio remoto en GitHub:
 
 ```bash
 git push -u origin feature/perfil-nombre-apellido
 ```
 
-### 8. Crear el Pull Request (PR)
+### 7. Crear el Pull Request (PR)
 1. Ingresa al repositorio en GitHub: [Demo-capacitacion](https://github.com/Especialistas-en-Medios/Demo-capacitacion).
 2. Haz clic en el botón **Compare & pull request** que aparecerá en la parte superior.
 3. Asegúrate de que la rama destino sea `base: main` y la rama de origen sea tu rama `compare: feature/...`.
