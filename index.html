@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipo de Desarrollo Legacy 👴| Demo Capacitación Git & GitHub</title>
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Estilos del proyecto creados con IA por flojera -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Encabezado didáctico -->
+  <header class="container my-4">
+    <div class="hero-banner p-4 p-md-5 text-center text-md-start">
+      <div class="row align-items-center">
+        <div class="col-md-8">
+          <span class="badge bg-primary mb-2 px-3 py-2 text-uppercase fw-bold">
+            <i class="bi bi-git me-1"></i> Ejercicio Práctico
+          </span>
+          <h1 class="display-6 fw-bold mb-2">Capacitación Git & GitHub</h1>
+          <p class="lead mb-3 text-light-50">
+            Aprende a clonar, crear ramas, confirmar cambios y enviar Pull Requests agregando tu tarjeta de
+            presentación.
+          </p>
+          <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-md-start">
+            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#instructionsModal">
+              <i class="bi bi-question-circle me-1"></i> Ver instrucciones del ejercicio
+            </button>
+            <span class="badge bg-dark border text-light align-self-center py-2 px-3">
+              Perfiles cargados: <strong id="profileCount" class="text-info">0</strong>
+            </span>
+          </div>
+        </div>
+        <div class="col-md-4 text-center mt-4 mt-md-0 d-none d-md-block">
+          <i class="bi bi-people-fill text-primary" style="font-size: 6rem; opacity: 0.85;"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenedor principal de perfiles -->
+  <main class="container mb-5">
+
+    <!-- Mensaje informativo para cuando se abre directamente como file:/// -->
+    <div id="corsWarning" class="alert alert-warning local-warning shadow-sm d-none mb-4" role="alert">
+      <div class="d-flex align-items-center">
+        <i class="bi bi-exclamation-triangle-fill fs-3 text-warning me-3"></i>
+        <div>
+          <h6 class="alert-heading fw-bold mb-1">¿Abriendo con doble clic (file://)?</h6>
+          <p class="mb-0 small">
+            Por seguridad, los navegadores restringen las peticiones <code>fetch()</code> a archivos locales.
+            Para visualizar los perfiles dinámicamente con un solo clic:
+            ejecuta <strong>iniciar-demo.bat</strong>, usa <strong>"Ver en el explorador"</strong> en Visual Studio, o <strong>Live Server</strong> en VS Code.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spinner de carga -->
+    <div id="loadingProfiles" class="text-center py-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando perfiles...</span>
+      </div>
+      <p class="text-muted mt-2 small">Cargando tarjetas de los desarrolladores...</p>
+    </div>
+
+    <!-- Grid de perfiles: Aquí se inyectan las tarjetas -->
+    <div id="profiles" class="row g-4"></div>
+
+  </main>
+
+  <!-- Modal de instrucciones didácticas -->
+  <div class="modal fade" id="instructionsModal" tabindex="-1" aria-labelledby="instructionsModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-light">
+          <h5 class="modal-title fw-bold" id="instructionsModalLabel">
+            <i class="bi bi-journal-code text-primary me-2"></i>Pasos para completar el ejercicio
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <ol class="list-group list-group-numbered list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold">Crea una nueva rama</div>
+                Ejecuta en tu terminal: <code>git checkout -b feature/perfil-tu-nombre</code>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold">Crea tu tarjeta en la carpeta <code>profiles/</code></div>
+                Copia el archivo <code>profiles/template.html</code> y renómbralo como
+                <code>profiles/tu-nombre.html</code>.
+                Edita tus datos: nombre, foto, puesto, bio, tecnologías y redes.
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold">Registra tu archivo en <code>script.js</code></div>
+                Abre <code>script.js</code> y agrega el nombre de tu archivo al arreglo <code>profileFiles</code> (ej.
+                <code>'juan-perez.html'</code>).
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold">Haz commit y push</div>
+                <code>git add .</code><br>
+                <code>git commit -m "feat: agrega tarjeta de presentacion de Tu Nombre"</code><br>
+                <code>git push origin feature/perfil-tu-nombre</code>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold">Abre un Pull Request</div>
+                Entra a GitHub y abre tu Pull Request hacia la rama principal (<code>main</code>).
+              </div>
+            </li>
+          </ol>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Entendido</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Script para cargar perfiles de forma dinámica -->
+  <script src="script.js"></script>
+</body>
+
+</html>
