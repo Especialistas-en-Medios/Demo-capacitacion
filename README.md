@@ -1,103 +1,123 @@
-# 🚀 Demo de Capacitación Git & GitHub
+# Capacitación Git & GitHub - Especialistas en Medios
 
-¡Bienvenidos a la práctica de Git y GitHub! En este ejercicio aprenderás el flujo de trabajo colaborativo profesional: clonar, crear ramas, realizar commits con buenas prácticas, registrar cambios y abrir un **Pull Request (PR)**.
+Repositorio didáctico diseñado para la capacitación del equipo de desarrollo en el flujo de trabajo estándar con Git y GitHub: gestión de ramas, confirmación de cambios mediante commits convencionales y resolución de integraciones a través de Pull Requests (PR).
 
 ---
 
-## 📂 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```text
-├── index.html        # Página principal con el grid (id="profiles")
-├── style.css         # Estilos visuales listos para las tarjetas
-├── script.js         # Lógica para cargar e inyectar perfiles dinámicamente
-└── profiles/         # Directorio donde cada dev creará su perfil
-    └── template.html # Plantilla base de ejemplo
+├── index.html        # Vista principal del grid de perfiles
+├── style.css         # Hoja de estilos del proyecto y componentes visuales
+├── script.js         # Lógica de carga dinámica de tarjetas de perfil
+├── iniciar-demo.bat  # Acceso directo para iniciar el servidor local en Windows
+├── servidor.ps1      # Servidor HTTP ligero basado en PowerShell nativo
+└── profiles/         # Directorio destinado a los perfiles individuales
+    └── template.html # Plantilla base de referencia
 ```
 
 ---
 
-## 🎯 Objetivo del Ejercicio
+## Objetivo del Ejercicio
 
-Cada desarrollador creará su propia **tarjeta de presentación** con su nombre, foto (o avatar), puesto, biografía, tecnologías y enlaces de contacto, y la integrará en el grid principal de [index.html](file:///c:/Users/deves/Documents/DESARROLLO_EM/Demo-capacitacion/index.html).
+Cada integrante del equipo debe crear su propia tarjeta de presentación a partir de `profiles/template.html`, registrarla en la lógica de la aplicación y solicitar su integración a la rama principal mediante un Pull Request.
 
 ---
 
-## 🛠️ Guía Paso a Paso para el Alumno
+## Flujo de Trabajo (Paso a Paso)
 
 ### 1. Clonar el repositorio
-Abre tu terminal y clona el proyecto:
+Abre una terminal y clona el proyecto en tu máquina local:
+
 ```bash
-git clone <URL_DEL_REPOSITORIO>
+git clone https://github.com/Especialistas-en-Medios/Demo-capacitacion.git
 cd Demo-capacitacion
 ```
 
-### 2. Crear tu propia rama de trabajo
-**Nunca trabajes directamente sobre `main`**. Crea una rama con tu nombre:
+### 2. Crear una rama de trabajo
+Crea y posiciónate en una rama propia utilizando la convención `feature/perfil-nombre-apellido`:
+
 ```bash
-git checkout -b feature/perfil-tu-nombre
+git checkout -b feature/perfil-nombre-apellido
 ```
-*(Ejemplo: `git checkout -b feature/perfil-juan-perez`)*
+*Ejemplo:* `git checkout -b feature/perfil-carlos-mendoza`
 
-### 3. Crear tu tarjeta de perfil
-1. Entra a la carpeta `profiles/`.
-2. Duplica el archivo [template.html](file:///c:/Users/deves/Documents/DESARROLLO_EM/Demo-capacitacion/profiles/template.html) y renómbralo con tu nombre:
+### 3. Crear tu tarjeta de presentación
+1. Dirígete a la carpeta `profiles/`.
+2. Duplica el archivo `template.html` y guárdalo con tu nombre en formato kebab-case:
    ```text
-   profiles/tu-nombre.html
+   profiles/nombre-apellido.html
    ```
-   *(Ejemplo: `profiles/juan-perez.html`)*
-3. Abre tu nuevo archivo en tu editor de código y modifica los datos de ejemplo:
-   - Tu nombre
-   - Foto o avatar (puedes usar URLs de [UI Avatars](https://ui-avatars.com/) o una imagen pública)
-   - Rol o especialidad
-   - Breve descripción
-   - Tecnologías que dominas o te interesan
-   - Enlaces a GitHub, LinkedIn o correo
+   *Ejemplo:* `profiles/carlos-mendoza.html`
+3. Abre tu archivo en tu editor de código y personaliza los campos:
+   - Nombre completo y rol profesional.
+   - Resumen o descripción personal.
+   - Tecnologías o especialidades técnicas.
+   - Enlace a foto o avatar de perfil.
 
-> 💡 **Tip:** Puedes hacer doble clic en tu archivo `profiles/tu-nombre.html` para abrirlo en el navegador y previsualizar cómo va quedando tu tarjeta de forma individual.
+> **Nota:** Puedes abrir tu archivo `profiles/nombre-apellido.html` directamente en el navegador con doble clic para previsualizar el diseño individual mientras lo editas.
 
-### 4. Registrar tu tarjeta en la página principal
-Abre [script.js](file:///c:/Users/deves/Documents/DESARROLLO_EM/Demo-capacitacion/script.js) y agrega el nombre de tu archivo a la lista `profileFiles`:
+### 4. Registrar tu perfil en la aplicación
+Abre el archivo [script.js](file:///c:/Users/deves/Documents/DESARROLLO_EM/Demo-capacitacion/script.js) y agrega el nombre de tu archivo en el arreglo `profileFiles`:
 
 ```javascript
 const profileFiles = [
   'template.html',
-  'tu-nombre.html', // <-- Agrega tu archivo aquí
+  'nombre-apellido.html', // <-- Agrega tu archivo aquí
 ];
 ```
 
-### 5. Guardar y confirmar tus cambios en Git
-Revisa el estado de tus archivos:
+### 5. Validar localmente
+Para comprobar que tu tarjeta se visualiza correctamente en la vista general:
+- Ejecuta `iniciar-demo.bat` con doble clic (inicia un servidor local y abre el navegador en `http://localhost:8080`).
+- O en Visual Studio: Clic derecho sobre `index.html` > **Ver en el explorador** (`Ctrl + Shift + W`).
+
+### 6. Confirmar cambios (Commit)
+Verifica los archivos modificados:
+
 ```bash
 git status
 ```
-Agrega tus cambios al área de preparación (stage):
+
+Agrega los archivos al área de preparación (stage):
+
 ```bash
 git add .
 ```
-Crea un commit descriptivo:
+
+Crea el commit respetando la convención:
+
 ```bash
-git commit -m "feat: agrega tarjeta de presentacion de Tu Nombre"
+git commit -m "feat: agrega tarjeta de presentacion de Nombre Apellido"
 ```
 
-### 6. Subir tu rama a GitHub
-Publica tu rama en el repositorio remoto:
+### 7. Publicar tu rama
+Envía tu rama al repositorio remoto en GitHub:
+
 ```bash
-git push -u origin feature/perfil-tu-nombre
+git push -u origin feature/perfil-nombre-apellido
 ```
 
-### 7. Abrir un Pull Request (PR)
-1. Entra al repositorio en **GitHub**.
-2. Verás un botón verde que dice **"Compare & pull request"**. Haz clic en él.
-3. Escribe un título claro y una breve descripción de tu cambio.
-4. Asigna a tus compañeros o al instructor como revisor y haz clic en **"Create pull request"**.
+### 8. Crear el Pull Request (PR)
+1. Ingresa al repositorio en GitHub: [Demo-capacitacion](https://github.com/Especialistas-en-Medios/Demo-capacitacion).
+2. Haz clic en el botón **Compare & pull request** que aparecerá en la parte superior.
+3. Asegúrate de que la rama destino sea `base: main` y la rama de origen sea tu rama `compare: feature/...`.
+4. Asigna un título descriptivo a tu PR y solicita la revisión del equipo o del instructor.
+5. Haz clic en **Create pull request**.
 
 ---
 
-## 💻 ¿Cómo visualizar el proyecto en local?
+## Convenciones del Proyecto
 
-Como el proyecto utiliza `fetch()` para ensamblar los perfiles dinámicamente, tienes estas opciones sin instalar nada adicional:
+### Nomenclatura de Ramas
+| Tipo | Prefijo | Ejemplo |
+| :--- | :--- | :--- |
+| Nueva funcionalidad / perfil | `feature/` | `feature/perfil-carlos-mendoza` |
+| Corrección de error | `fix/` | `fix/corrige-estilos-carlos` |
 
-- **⚡ La más fácil (Doble clic):** Ejecuta el archivo `iniciar-demo.bat`. Utiliza PowerShell nativo de Windows (no necesitas Python ni Node.js) y te abrirá el navegador automáticamente en `http://localhost:8080`.
-- **En Visual Studio:** Clic derecho sobre [index.html](file:///c:/Users/deves/Documents/DESARROLLO_EM/Demo-capacitacion/index.html) &rarr; **Ver en el explorador** (*Ctrl + Shift + W*). Levantará IIS Express solo.
-- **En VS Code:** Clic derecho sobre `index.html` &rarr; **Open with Live Server**.
-- **En producción:** Puede publicarse directamente en **GitHub Pages** activándolo en *Settings &rarr; Pages*.
+### Mensajes de Confirmación (Conventional Commits)
+| Prefijo | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| `feat:` | Incorporación de nueva funcionalidad o tarjeta | `feat: agrega tarjeta de presentacion de Carlos Mendoza` |
+| `fix:` | Corrección de errores, enlaces rotos o bugs | `fix: corrige sintaxis en script de perfiles` |
+| `docs:` | Modificaciones exclusivas a documentación | `docs: actualiza guia de flujo de trabajo` |
