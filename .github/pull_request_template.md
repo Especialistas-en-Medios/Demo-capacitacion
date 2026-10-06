@@ -13,7 +13,7 @@
 
 ## Evidencia de Pruebas
 <!-- Describe cómo se validó el comportamiento localmente. Adjunta captura o logs si es relevante. -->
-- 
+- Describe aquí las pruebas realizadas y adjunta evidencia si aplica.
 
 ## Declaración de Cumplimiento del Desarrollador
 <!-- Marca con una 'x' cada punto tras verificarlo personalmente: [x] -->
