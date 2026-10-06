@@ -18,7 +18,7 @@
 ## Declaración de Cumplimiento del Desarrollador
 <!-- Marca con una 'x' cada punto tras verificarlo personalmente: [x] -->
 - [ ] La rama de origen cumple con la nomenclatura definida (`feature/identificador` o `fix/identificador`).
-- [ ] Los mensajes de confirmación siguen el estándar de Conventional Commits (`tipo(scope): accion`).
+- [ ] Los mensajes de confirmación siguen el estándar de Conventional Commits (`tipo(scope): acción`).
 - [ ] Se probó el funcionamiento localmente sin advertencias ni errores en tiempo de ejecución.
 - [ ] El código no contiene dependencias innecesarias, credenciales ni archivos temporales.
 - [ ] Se asignó el revisor técnico correspondiente en la columna derecha.
