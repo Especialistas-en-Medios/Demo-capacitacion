@@ -78,7 +78,7 @@ git add .
 Crea el commit respetando la convención:
 
 ```bash
-git commit -m "feat: agrega tarjeta de presentacion de Nombre Apellido"
+git commit -m "feat(perfil): agregar tarjeta de juan perez"
 ```
 
 ### 6. Publicar tu rama
@@ -106,8 +106,56 @@ git push -u origin feature/perfil-nombre-apellido
 | Corrección de error | `fix/` | `fix/corrige-estilos-carlos` |
 
 ### Mensajes de Confirmación (Conventional Commits)
-| Prefijo | Descripción | Ejemplo |
+
+Seguimos el estándar internacional de **[Conventional Commits](https://www.conventionalcommits.org/)**. Cada commit debe explicar con claridad **qué** tipo de cambio se realizó, **sobre qué componente técnico recae** (scope) y una **descripción concisa** en minúsculas y modo imperativo.
+
+#### Estructura Universal
+
+```text
+tipo(scope): descripción breve en minúsculas y modo imperativo
+```
+
+- **`tipo`**: Define la naturaleza del cambio (`feat`, `fix`, `docs`, etc.).
+- **`(scope)`** *(opcional pero muy recomendado)*: Módulo, archivo o componente afectado en formato `kebab-case` (ej. `perfil`, `css`, `script`, `readme`). Si el cambio impacta de forma global a todo el proyecto, el scope puede omitirse: `tipo: descripción`.
+- **`descripción`**: Frase corta sin punto final, en minúsculas y redactada en tiempo presente/imperativo (ej. `agregar...`, `corregir...`).
+
+---
+
+#### Los Más Frecuentes (Guía Rápida para Principiantes)
+
+> [!TIP]
+> **Para los ejercicios de este repositorio**, la gran mayoría de tus commits pertenecerán a estos 5 tipos:
+
+| Tipo | ¿Cuándo se usa en este taller? | Ejemplo listo para usar |
 | :--- | :--- | :--- |
-| `feat:` | Incorporación de nueva funcionalidad o tarjeta | `feat: agrega tarjeta de presentacion de Carlos Mendoza` |
-| `fix:` | Corrección de errores, enlaces rotos o bugs | `fix: corrige sintaxis en script de perfiles` |
-| `docs:` | Modificaciones exclusivas a documentación | `docs: actualiza guia de flujo de trabajo` |
+| **`feat`** | Cuando creas tu tarjeta de presentación o agregas un elemento nuevo. | `feat(perfil): agregar tarjeta de carlos mendoza` |
+| **`fix`** | Cuando corriges un enlace roto, avatar que no carga o algún bug. | `fix(perfil): corregir ruta de foto y algún bug en la interface` |
+| **`style`** | Ajustes estéticos, espaciado, colores o formato CSS sin tocar lógica JS. | `style(css): ajustar margen y bordes de las tarjetas` |
+| **`docs`** | Modificaciones en documentación o en el archivo `README.md`. | `docs(readme): agregar instrucciones para windows` |
+| **`chore`** | Tareas de mantenimiento, configuración, `.gitignore` o limpieza de archivos. | `chore(gitignore): ignorar archivos temporales del editor` |
+
+---
+
+#### Tabla Completa de Tipos de Commit
+
+| Tipo | Cuándo se usa | Ejemplo con Scope (`kebab-case`) |
+| :--- | :--- | :--- |
+| **`feat`** | Incorporación de una nueva funcionalidad, componente o vista. | `feat(perfil): agregar tarjeta de carlos mendoza` |
+| **`fix`** | Corrección de un error, bug o comportamiento no deseado. | `fix(card-grid): resolver desalineacion visual en pantallas chicas` |
+| **`docs`** | Modificaciones exclusivas a documentación (`README`, guías). | `docs(readme): agregar instrucciones para ejecutar en windows` |
+| **`style`** | Ajustes visuales de formato sin impacto en lógica (espaciado, comillas). | `style(css): ordenar propiedades flexbox y colores globales` |
+| **`refactor`** | Limpieza o reestructuración de código sin alterar funcionalidad. | `refactor(script): simplificar funcion de carga dinamica de perfiles` |
+| **`perf`** | Optimización de rendimiento o consumo de recursos. | `perf(imagenes): optimizar tiempo de carga de avatares locales` |
+| **`test`** | Creación o corrección de pruebas automatizadas. | `test(parser): agregar validacion de formato de tarjetas html` |
+| **`build`** | Cambios en dependencias, empaquetado o librerías externas. | `build(npm): agregar dependencia para minificar estilos css` |
+| **`chore`** | Tareas misceláneas de mantenimiento fuera del código fuente. | `chore(gitignore): ignorar archivos temporales del editor` |
+| **`revert`** | Reversión de un commit anterior que causó problemas. | `revert: feat(perfil): agregar tarjeta de carlos mendoza` |
+| **`ci`** | Ajustes en pipelines y flujos automatizados de GitHub Actions (avanzado) | `ci(github): configurar worflow para ejecucion en windows` |
+---
+
+#### Reglas de Oro para un Historial Limpio
+
+1. **Escribe en infinitivo o imperativo**: Usa verbos como `agregar`, `corregir`, `actualizar` o `eliminar` (evita el pasado como *"agregado"* o *"se arregló"*).
+2. **Usa minúsculas**: Mantiene consistencia y legibilidad profesional al revisar `git log`.
+3. **Sé descriptivo y conciso**: Evita mensajes vagos como `git commit -m "cambios"`, `git commit -m "subir archivos"` o `git commit -m "fix"`.
+4. **Commits atómicos**: Haz commits específicos por cada cambio lógico. Es preferible tener dos commits claros (`feat(perfil): ...` y `fix(css): ...`) que uno solo gigante que mezcle todo.
